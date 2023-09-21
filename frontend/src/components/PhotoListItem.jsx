@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/PhotoListItem.scss';
+import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = (props) => {
   const { username, imageSource, id, location, profile } = props;
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavClick = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   return (
     <div className="photo-list-item"> {/* Apply the class for styling */}
@@ -17,6 +23,7 @@ const PhotoListItem = (props) => {
           </div>
         </div>
         <div className="location">{`${location.city}, ${location.country}`}</div>
+        <PhotoFavButton isFavorite={isFavorite} onClick={handleFavClick} />
       </div>
     </div>
   );
