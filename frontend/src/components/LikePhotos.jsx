@@ -1,21 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const LikeIcon = () => {
-  const [liked, setLiked] = useState(false);
-
-  const toggleLike = () => {
-    setLiked(!liked);
-  };
-
+const LikedPhotos = () => {
   return (
-    <div className="like-icon" onClick={toggleLike}>
-      {liked ? (
-        <i className="fas fa-heart"></i>
-      ) : (
-        <i className="far fa-heart"></i>
-      )}
+    <div className="liked-photos">
+      {/* Insert code to display total liked photos */}
+      Total Liked Photos: 10 {/* Replace with actual count */}
     </div>
   );
 };
 
-export default LikeIcon;
+export default LikedPhotos;
+
