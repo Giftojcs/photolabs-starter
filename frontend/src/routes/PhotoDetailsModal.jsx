@@ -11,7 +11,7 @@ const PhotoDetailsModal = ({ handleCloseModal, selectedPhoto }) => {
   };
 
   const handleClose = () => {
-    handleCloseModal(); // Invoke the provided close function
+    handleCloseModal();
   };
 
   // Destructure the properties from selectedPhoto if available

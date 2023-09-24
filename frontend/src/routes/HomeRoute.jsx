@@ -20,18 +20,18 @@ const HomeRoute = ({ handleToggleModal, photoData, topicData }) => {
   };
 
   const handleTopicClick = (topicId) => {
-    fetchPhotosByTopic(topicId); // Fetch photos for the clicked topic
+    fetchPhotosByTopic(topicId); 
   };
 
-return (
+  return (
     <div className="home-route">
       <TopNavigationBar
         favorites={favorites}
-        topics={topicData} // Pass topics to the TopNavigationBar
-        onTopicClick={handleTopicClick} // Pass the topic click handler
+        topics={topicData} 
+        onTopicClick={handleTopicClick} 
       />
       <PhotoList
-      photos={state.photoData}
+        photos={state.photoData}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         handleToggleModal={handleToggleModal}

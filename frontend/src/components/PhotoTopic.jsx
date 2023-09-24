@@ -1,5 +1,5 @@
 import React from 'react';
-import TopicList from './TopicList'; 
+import TopicList from './TopicList';
 
 const PhotoTopic = () => {
   return (

@@ -4,7 +4,7 @@ import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
 const PhotoFavButton = ({ liked, toggleLike }) => {
-  const buttonClass = liked ? 'liked' : 'not-liked'; 
+  const buttonClass = liked ? 'liked' : 'not-liked';
 
   return (
     <button className={`photo-list__fav-icon ${buttonClass}`} onClick={toggleLike}>
