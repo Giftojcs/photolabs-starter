@@ -3,28 +3,21 @@ import '../styles/PhotoListItem.scss';
 import PhotoFavButton from './PhotoFavButton';
 
 const PhotoListItem = (props) => {
-  const { username, imageSource, id, location, profile } = props;
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { photo, isFavorite, toggleFavorite } = props;
 
-  const handleFavClick = () => {
-    setIsFavorite(!isFavorite);
+  const handleFavClick = (e) => {
+    e.stopPropagation();
+    toggleFavorite(photo.id);
   };
 
   return (
-    <div className="photo-list-item"> {/* Apply the class for styling */}
-      <img src={imageSource} alt={`Photo ${id}`} />
-      <div className="photo-details">
-        <div className="profile">
-          <div className="profile-image">
-            <img src={profile} alt={`Profile ${username}`} />
-          </div>
-          <div className="profile-info">
-            <span>{username}</span>
-          </div>
-        </div>
-        <div className="location">{`${location.city}, ${location.country}`}</div>
-        <PhotoFavButton isFavorite={isFavorite} onClick={handleFavClick} />
-      </div>
+    <div className="photo-container" onClick={() => handlePhotoClick(photo.id)}>
+      <img src={photo.urls.regular} alt={`Photo ${photo.id}`} />
+      <button className={`like-button ${isFavorite ? 'liked' : ''}`} onClick={handleFavClick}>
+        <span className="heart-icon" role="img" aria-label="Heart">
+          ❤️
+        </span>
+      </button>
     </div>
   );
 };

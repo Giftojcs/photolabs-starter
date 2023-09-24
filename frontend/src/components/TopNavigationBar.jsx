@@ -1,13 +1,20 @@
 import React from 'react';
-
 import '../styles/TopNavigationBar.scss'
+import Logo from "./AppLogo";
+import TopicList from "./TopicList";
+//import LikedPhotos from "./LikedPhotos";
+import { FaHeart } from "react-icons/fa";
 
-const TopNavigation = () => {
+const TopNavigationBar = ({ likedCount, photoCategories }) => {
   return (
     <div className="top-nav-bar">
-      <span className="top-nav-bar__logo">PhotoLabs</span>
+      <Logo />
+      <TopicList photoCategories={photoCategories} />
+      <div className="liked-photos">
+        <FaHeart /> Total liked photos: {likedCount}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default TopNavigation;
+export default TopNavigationBar;
