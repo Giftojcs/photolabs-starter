@@ -1,6 +1,7 @@
-// Topics.js
 import React from "react";
-import "../styles/TopicList.scss"; // Assuming TopicList styles are defined here
+import TopicListItem from "./TopicListItem";
+import "../styles/TopicList.scss";
+import mockTopics from "../mocks/topics";
 import { FaHeart } from "react-icons/fa";
 
 const sampleDataForTopicList = [
@@ -20,23 +21,23 @@ const sampleDataForTopicList = [
     title: "People",
   },
 ];
-
-const TopicList = ({ photoCategories }) => {
-  const filteredTopics = sampleDataForTopicList.filter((topic) =>
-    photoCategories.includes(topic.slug)
-  );
-
+const TopicList = () => {
   return (
-    <ul className="top-nav-bar__topic-list">
-      {filteredTopics.map((topic) => (
-        <li key={topic.id} className="topic-list__item">
-          {topic.title}
-        </li>
+    <div className="top-nav-bar__topic-list">
+      {mockTopics.map((topic) => (
+        <TopicListItem key={topic.id} data={topic} />
       ))}
-      <li className="topic-list__item">
-        <FaHeart /> Liked Photos
-      </li>
-    </ul>
+      <ul className="topic-list">
+        {mockTopics.map((topic) => (
+          <li key={topic.id} className="topic-list__item">
+            {topic.title}
+          </li>
+        ))}
+        <li className="topic-list__item">
+          <FaHeart /> Liked Photos
+        </li>
+      </ul>
+    </div>
   );
 };
 
