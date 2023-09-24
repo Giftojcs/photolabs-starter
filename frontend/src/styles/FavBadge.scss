@@ -22,14 +22,3 @@ height: 20px;
     font-size: 16px;
   }
 }
-.photo-fav-button {
-  cursor: pointer;
-}
-
-.photo-fav-button i {
-  font-size: 24px;
-}
-
-.photo-fav-button.active i {
-  color: red; /* Change the color when liked */
-}
