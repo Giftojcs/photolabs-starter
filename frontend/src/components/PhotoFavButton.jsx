@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
-const PhotoFavButton = ({ onClick, isFavorite }) => {
+import FavIcon from './FavIcon';
+import '../styles/PhotoFavButton.scss';
+
+const PhotoFavButton = ({ liked, toggleLike }) => {
+  const buttonClass = liked ? 'liked' : 'not-liked'; 
+
   return (
-    <button onClick={onClick}>
-      {isFavorite ? 'Favorite' : 'Not Favorite'}
-      {/* You can use your favorite icon SVG or image here */}
-      {isFavorite ? '❤️' : '🖤'}
+    <button className={`photo-list__fav-icon ${buttonClass}`} onClick={toggleLike}>
+      {/* Add your favorite icon SVG or image here */}
     </button>
   );
 };
 
-export default PhotoFavButton;
 
+export default PhotoFavButton;
