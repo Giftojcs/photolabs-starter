@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/TopNavigationBar.scss';
 import { FaHeart } from 'react-icons/fa';
 
-const TopNavigationBar = ({ likedCount, topic, onTopClick, favorites }) => {
+const TopNavigationBar = ({ likedCount, onTopClick, favorites }) => {
   const notificationCount = favorites.length;
 
   return (
@@ -35,4 +35,5 @@ const TopNavigationBar = ({ likedCount, topic, onTopClick, favorites }) => {
 };
 
 export default TopNavigationBar;
+
 

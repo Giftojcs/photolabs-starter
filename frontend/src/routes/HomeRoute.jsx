@@ -31,7 +31,7 @@ const HomeRoute = ({ handleToggleModal, photoData, topicData }) => {
         onTopicClick={handleTopicClick} 
       />
       <PhotoList
-        photos={state.photoData}
+        photos={state?.photoData}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         handleToggleModal={handleToggleModal}
