@@ -1,4 +1,4 @@
-**PhotoLabs Application Project**
+**PhotoLabs Project**
 
 Welcome to the PhotoLabs Application Project! This project aims to showcase a React-based single-page application (SPA) that allows users to view photos in various contexts. We will leverage a pre-existing API to create an engaging user experience for interacting with photos.
 
@@ -31,11 +31,13 @@ Client-Side Application (PhotoLabs)
 Development of a React-based single page application (SPA) called PhotoLabs.
 The application will communicate with the API server over HTTP using the JSON format.
 Server and Persistence Layer
+
 Data Layer:
 PostgreSQL database will serve as the data layer.
+
 API Server:
 Express.js will be the basis for the PhotoLabs API server application.
-The server/persistence layer may require modifications for stretch goals.
+
 Behavioral Requirements
 PhotoLabs is designed to provide an intuitive and enjoyable experience for users interacting with photos.
 
