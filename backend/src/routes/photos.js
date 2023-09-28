@@ -1,4 +1,15 @@
-const router = require("express").Router();
+const express = require('express');
+const router = express.Router();
+const photoRouter = require('express').Router();
+
+photoRouter.post('/:id/like', (req, res) => {
+  const photoId = req.params.id;
+  // Implement logic to handle liking the photo with the given ID
+  // For example, update the photo record in the database to mark it as liked by the user
+  res.status(200).json({ message: `Liked photo with ID ${photoId}` });
+});
+
+module.exports = photoRouter;
 
 module.exports = db => {
   router.get("/photos", (request, response) => {
@@ -58,6 +69,20 @@ module.exports = db => {
     `).then(({ rows }) => {
       response.json(rows[0].photo_data);
     });
+  });
+
+  // Define the route for fetching liked photos
+  router.get('/liked-photos', async (req, res) => {
+    try {
+      // Implement logic to fetch liked photos from the database
+      const likedPhotos = await fetchLikedPhotosFromDatabase();
+
+      // Send the fetched liked photos as the response
+      res.json({ likedPhotos });
+    } catch (error) {
+      console.error('Error fetching liked photos:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   });
 
   return router;
