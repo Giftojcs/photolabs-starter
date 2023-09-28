@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopNavigationBar from '../components/TopNavigationBar';
 import PhotoList from '../components/PhotoList';
 import TopicList from '../components/TopicList';
-import '../styles/HomeRoute.scss';
+import SearchBar from '../components/SearchBar';
 import useApplicationData from '../Hooks/useApplicationData';
 
-const HomeRoute = ({ handleToggleModal, photoData, topicData }) => {
-  const { state, fetchPhotosByTopic } = useApplicationData();
+const HomeRoute = ({ handleToggleModal, photoData }) => {
+  const { state, handleSearch } = useApplicationData();
+
   const [favorites, setFavorites] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTopic, setSelectedTopic] = useState(null);
 
   const toggleFavorite = (photoId) => {
     setFavorites((prevFavorites) => {
@@ -19,26 +22,41 @@ const HomeRoute = ({ handleToggleModal, photoData, topicData }) => {
     });
   };
 
-  const handleTopicClick = (topicId) => {
-    fetchPhotosByTopic(topicId); 
+  const handleSelectTopic = (topic) => {
+    setSelectedTopic(topic);
   };
 
   return (
     <div className="home-route">
       <TopNavigationBar
+        likedCount={favorites.length}
         favorites={favorites}
-        topics={topicData} 
-        onTopicClick={handleTopicClick} 
+        topics={state?.topicData}
+        selectedTopic={selectedTopic}
+        onSelectTopic={handleSelectTopic}
+      />
+      <SearchBar
+        handleSearch={handleSearch}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
       <PhotoList
         photos={state?.photoData}
         favorites={favorites}
         toggleFavorite={toggleFavorite}
         handleToggleModal={handleToggleModal}
+        searchTerm={searchTerm}
+        selectedTopic={selectedTopic}
       />
-      <TopicList topicData={topicData} />
+      <TopicList
+        topicData={state?.topicData}
+        selectedTopic={selectedTopic}
+        onSelectTopic={handleSelectTopic}
+      />
     </div>
   );
 };
 
 export default HomeRoute;
+
+

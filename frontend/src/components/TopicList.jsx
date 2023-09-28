@@ -1,39 +1,36 @@
 import React from "react";
 import TopicListItem from "./TopicListItem";
-import "../styles/TopicList.scss";
-import mockTopics from "../mocks/topics";
 import { FaHeart } from "react-icons/fa";
+import useFetchTopics from "../Hooks/useFetchTopics";
+import "../styles/TopicList.scss";
 
-const sampleDataForTopicList = [
-  {
-    id: "1",
-    slug: "topic-1",
-    title: "Nature",
-  },
-  {
-    id: "2",
-    slug: "topic-2",
-    title: "Travel",
-  },
-  {
-    id: "3",
-    slug: "topic-3",
-    title: "People",
-  },
-];
-const TopicList = () => {
+const TopicList = ({ selectedTopic, onSelectTopic }) => {
+  const { topics, isLoading, isError } = useFetchTopics();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading topics.</div>;
+  }
+
   return (
     <div className="top-nav-bar__topic-list">
-      {mockTopics.map((topic) => (
-        <TopicListItem key={topic.id} data={topic} />
-      ))}
       <ul className="topic-list">
-        {mockTopics.map((topic) => (
-          <li key={topic.id} className="topic-list__item">
+        {topics.map((topic) => (
+          <li
+            key={topic.id}
+            className={`topic-list__item ${selectedTopic && selectedTopic.id === topic.id ? 'active' : ''}`}
+            onClick={() => onSelectTopic(topic)}
+          >
             {topic.title}
           </li>
         ))}
-        <li className="topic-list__item">
+        <li
+          className={`topic-list__item ${!selectedTopic ? 'active' : ''}`}
+          onClick={() => onSelectTopic(null)}
+        >
           <FaHeart /> Liked Photos
         </li>
       </ul>
@@ -42,6 +39,7 @@ const TopicList = () => {
 };
 
 export default TopicList;
+
 
 
 

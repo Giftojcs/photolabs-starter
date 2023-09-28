@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/TopNavigationBar.scss';
 import { FaHeart } from 'react-icons/fa';
 
-const TopNavigationBar = ({ likedCount, onTopClick, favorites }) => {
+const TopNavigationBar = ({ likedCount, onTopicClick, favorites, topics }) => {
   const notificationCount = favorites.length;
 
   return (
@@ -13,11 +13,12 @@ const TopNavigationBar = ({ likedCount, onTopClick, favorites }) => {
       </div>
 
       <div className="topics">
-        <div className="topic">Nature</div>
-        <div className="topic">Travel</div>
-        <div className="topic">People</div>
-        <div className="topic">Fashion</div>
-        <div className="topic">Animals</div>
+        {/* Render topics dynamically */}
+        {topics.map((topic) => (
+          <div key={topic.id} className="topic" onClick={() => onTopicClick(topic)}>
+            {topic.title}
+          </div>
+        ))}
       </div>
 
       <div className="liked-photos">
@@ -35,5 +36,6 @@ const TopNavigationBar = ({ likedCount, onTopClick, favorites }) => {
 };
 
 export default TopNavigationBar;
+
 
 
