@@ -1,62 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import TopNavigationBar from '../components/TopNavigationBar';
-import PhotoList from '../components/PhotoList';
-import TopicList from '../components/TopicList';
-import SearchBar from '../components/SearchBar';
-import useApplicationData from '../Hooks/useApplicationData';
+import React, { useState } from 'react';
 
-const HomeRoute = ({ handleToggleModal, photoData }) => {
-  const { state, handleSearch } = useApplicationData();
+import '../styles/HomeRoute.scss';
+import TopNavigation from 'components/TopNavigationBar';
+import PhotoList from 'components/PhotoList';
 
-  const [favorites, setFavorites] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTopic, setSelectedTopic] = useState(null);
-
-  const toggleFavorite = (photoId) => {
-    setFavorites((prevFavorites) => {
-      if (prevFavorites.includes(photoId)) {
-        return prevFavorites.filter((id) => id !== photoId);
-      } else {
-        return [...prevFavorites, photoId];
-      }
-    });
-  };
-
-  const handleSelectTopic = (topic) => {
-    setSelectedTopic(topic);
-  };
+//Home Route - Loads other components
+const HomeRoute = (props) => {
+  const { toggleFavorite, favoritedPhotos, photos, topics, getPhotosByTopic } = props
 
   return (
     <div className="home-route">
-      <TopNavigationBar
-        likedCount={favorites.length}
-        favorites={favorites}
-        topics={state?.topicData}
-        selectedTopic={selectedTopic}
-        onSelectTopic={handleSelectTopic}
-      />
-      <SearchBar
-        handleSearch={handleSearch}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+      <TopNavigation
+        topic={topics}
+        favoritedPhotos={favoritedPhotos}
+        getPhotosByTopic={getPhotosByTopic}
       />
       <PhotoList
-        photos={state?.photoData}
-        favorites={favorites}
+        photos={photos}
         toggleFavorite={toggleFavorite}
-        handleToggleModal={handleToggleModal}
-        searchTerm={searchTerm}
-        selectedTopic={selectedTopic}
-      />
-      <TopicList
-        topicData={state?.topicData}
-        selectedTopic={selectedTopic}
-        onSelectTopic={handleSelectTopic}
+        favoritedPhotos={favoritedPhotos}
+        openModalDetails={props.openModalDetails}
       />
     </div>
   );
 };
 
 export default HomeRoute;
-
-

@@ -1,42 +1,60 @@
-import React, { useState } from 'react';
-import '../styles/PhotoDetailsModal.scss';
+import React from 'react';
+
+import '../styles/PhotoDetailsModal.scss'
 import closeSymbol from '../assets/closeSymbol.svg';
-import PhotoList from '../components/PhotoList';
+import PhotoList from 'components/PhotoList';
+import PhotoFavButton from 'components/PhotoFavButton';
 
-const PhotoDetailsModal = ({ handleCloseModal, selectedPhoto }) => {
-  const [liked, setLiked] = useState(false);
-
-  const handleToggleLike = () => {
-    setLiked(prevLiked => !prevLiked);
-  };
-
-  const handleClose = () => {
-    handleCloseModal();
-  };
-
-  // Destructure the properties from selectedPhoto if available
-  const { id, user, urls } = selectedPhoto || {};
+//Photo Modal Components
+const PhotoDetailsModal = (props) => {
+  const { id, location, similar_photos, urls, user } = props.photo;
+  const { toggleFavorite, favoritedPhotos } = props;
 
   return (
-    <div className="photo-details-modal">
-      <button className="photo-details-modal__close-button" onClick={handleClose}>
-        <img src={closeSymbol} alt="close symbol" />
-      </button>
-      <div className="modal-content">
-        <div className="selected-photo">
-          {urls && <img src={urls.full} alt={`Photo ${id}`} />}
-          <button className={`like-button-modal ${liked ? 'liked' : ''}`} onClick={handleToggleLike}>
-            <span className="heart-icon" role="img" aria-label="Heart">❤️</span> {/* Heart icon */}
-            {liked ? 'Unlike' : 'Like'}
-          </button>
+    <>
+      <div className="photo-details-modal">
+        <button className="photo-details-modal__close-button" >
+          <img
+            onClick={props.closeModal}
+            src={closeSymbol}
+            alt="close symbol"
+          />
+        </button>
+
+        <div className="photo-details-modal__images">
+          <PhotoFavButton
+            isFavorited={favoritedPhotos.includes(id)}
+            toggleFavorite={() => toggleFavorite(id)}
+          />
+          <img
+            className="photo-details-modal__image"
+            src={urls.regular}
+            alt="image of Photo"
+          />
+
+          <div className="photo-list__user-details">
+            <img
+              className="photo-list__user-profile"
+              src={user.profile}
+              alt="profile image"
+            />
+            <div className="photo-list__user-info ">
+              {user.name}
+              <div className="photo-list__user-location" >
+                {`${location.city}, ${location.country}`}
+              </div>
+            </div>
+          </div>
+          <h3>Similar Photos</h3>
+          <PhotoList
+            photos={Object.values(similar_photos)}
+            toggleFavorite={toggleFavorite}
+            favoritedPhotos={favoritedPhotos}
+          />
         </div>
-        <p>Selected Photo Details Here</p>
-        <h2>Similar Photos</h2>
-        <PhotoList excludePhotoId={id} favorites={liked ? [id] : []} toggleFavorite={handleToggleLike} />
       </div>
-    </div>
-  );
+    </>
+  )
 };
 
 export default PhotoDetailsModal;
-

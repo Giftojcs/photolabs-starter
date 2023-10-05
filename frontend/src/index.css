@@ -11,21 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-:root {
-  --theme-color: #3498db; 
-}
-
-
-body {
-  background-color: var(--theme-color);
-}
-
-.custom-box {
-  width: 500px;
-  height: 500px;
-  margin: 20px; 
-  border: 2px solid #000; 
-  padding: 10px; 
-  background-color: #fff; 
-}

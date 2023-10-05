@@ -1,52 +1,34 @@
 import React, { useState } from 'react';
-import HomeRoute from './routes/HomeRoute';
-import PhotoDetailsModal from './routes/PhotoDetailsModal';
-import useApplicationData from './Hooks/useApplicationData';
-import TopicListItem from './components/TopicListItem';
-import LikedPhotos from './components/LikedPhotos';
+
 import './App.scss';
-import PhotoList from './components/PhotoList';
+
+import HomeRoute from 'routes/HomeRoute';
+import PhotoDetailsModal from 'routes/PhotoDetailsModal';
+import useApplicationData from 'hooks/useApplicationData';
+
+// Note: Rendering a single component to build components in isolation
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const handleSearch = (searchTerm) => {
-    setSearchTerm(searchTerm);
-  };
-  const [likedPhotosCount, setLikedPhotosCount] = useState(0);
-  const handleLike = () => {
-    // Update the liked photos count when a photo is liked
-    setLikedPhotosCount(prevCount => prevCount + 1);
-  };
-  const { state } = useApplicationData(searchTerm, handleSearch);
 
-  const handleToggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-    console.log('isModalOpen:', !isModalOpen);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    console.log('isModalOpen:', false);
-  };
-
-  
+  const { state, updateToFavPhotoIds, setPhotoSelected, onClosePhotoDetailsModal, getPhotosByTopic } = useApplicationData();
 
   return (
     <div className="App">
-      {/* Pass state.photoData to HomeRoute */}
-      <HomeRoute handleToggleModal={handleToggleModal} handleSearch={handleSearch} photoData={state?.photoData} />
-      {isModalOpen && <PhotoDetailsModal handleCloseModal={handleCloseModal} />}
-      <LikedPhotos />
-      <div className="top-nav">
-        <p>Liked Photos Count: {likedPhotosCount}</p>
-      </div>
-      <PhotoList handleLike={handleLike} />
-
+      <HomeRoute
+        openModalDetails={setPhotoSelected}
+        toggleFavorite={updateToFavPhotoIds}
+        favoritedPhotos={state.favoritedPhotos}
+        photos={state.photoData}
+        topics={state.topicData}
+        getPhotosByTopic={getPhotosByTopic}
+      />
+      {state.clickedPhoto && <PhotoDetailsModal
+        photo={state.clickedPhoto}
+        closeModal={onClosePhotoDetailsModal}
+        toggleFavorite={updateToFavPhotoIds}
+        favoritedPhotos={state.favoritedPhotos}
+      />}
     </div>
-    
   );
 };
 
 export default App;
-
-

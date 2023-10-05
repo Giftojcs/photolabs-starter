@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
-import '../styles/PhotoListItem.scss';
+import React, { useState } from "react";
 
-const PhotoListItem = ({ data }) => {
-  const { urls, user, location } = data;
-  const [isActive, setIsActive] = useState(false);
+import "../styles/PhotoListItem.scss";
+import PhotoFavButton from "./PhotoFavButton";
 
-  const toggleLike = () => {
-    setIsActive(!isActive);
+// ModifiedPhotoListItem Component
+const PhotoListItem = (props) => {
+  const { id: modifiedId, location: modifiedLocation, urls: modifiedUrls, user: modifiedUser } = props.photo;
+  const { favoritedPhotos: modifiedFavoritedPhotos, toggleFavorite: modifiedToggleFavorite } = props;
 
+  // Function for opening Modal
+  const onClick = () => {
+    props.openModalDetails(props.photo);
+  }
 
-  };
+  // Short circuit for favorited Photos
+  const isFavorited = modifiedFavoritedPhotos && modifiedFavoritedPhotos.includes(modifiedId);
 
   return (
-    <div className={`photo-list__item ${isActive ? 'active' : 'inactive'}`}>
-      <img src={urls?.regular} alt={`Photo by ${user?.username}`} />
-      <div className="photo-details">
-        <h2>{user?.username}</h2>
-        <p>{`${location?.city}, ${location?.country}`}</p>
-        {/* Other details */}
+    <>
+      <div className="photo-list__item">
+        <PhotoFavButton
+          isFavorited={isFavorited}
+          toggleFavorite={() => modifiedToggleFavorite(modifiedId)}
+        />
+        <img
+          className="photo-list__image"
+          src={modifiedUrls.regular}
+          onClick={onClick}
+          alt="image of Photo"
+        />
+
+        <div className="photo-list__user-details">
+          <img
+            className="photo-list__user-profile"
+            src={modifiedUser.profile}
+            alt="profile image"
+          />
+          <div className="photo-list__user-info">
+            {modifiedUser.name}
+            <div className="photo-list__user-location">
+              {`${modifiedLocation.city}, ${modifiedLocation.country}`}
+            </div>
+          </div>
+        </div>
       </div>
-      {/* Favorite icon with click listener */}
-      <div className="photo-list__fav-icon" onClick={toggleLike}>
-        <svg
-          className={`photo-list__fav-icon-svg ${isActive ? 'active' : 'inactive'}`}
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          {/* Heart icon paths */}
-          {isActive ? (
-            <path
-              fill="#FF0000"
-              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-            />
-          ) : (
-            <path
-              fill="#000000"
-              d="M0 0h24v24H0z"
-            />
-          )}
-        </svg>
-      </div>
-    </div>
-  );
+    </>
+  )
 };
 
 export default PhotoListItem;
-
-
-
-

@@ -1,41 +1,26 @@
 import React from 'react';
-import '../styles/TopNavigationBar.scss';
-import { FaHeart } from 'react-icons/fa';
+import '../styles/TopNavigationBar.scss'
+import FavBadge from './FavBadge';
+import TopicList from './TopicList';
 
-const TopNavigationBar = ({ likedCount, onTopicClick, favorites, topics }) => {
-  const notificationCount = favorites.length;
-
+//Top Navgation Component
+const TopNavigation = (props) => {
+  const { favoritedPhotos, getPhotosByTopic } = props;
   return (
     <div className="top-nav-bar">
-      <div className="logo">
-        {/* Placeholder for logo */}
-        PHOTOLABS
-      </div>
+      <span className="top-nav-bar__logo">
+        PhotoLabs
+      </span>
+      <TopicList 
+      topics={props.topic} 
+      getPhotosByTopic={getPhotosByTopic} 
+      />
+      <FavBadge 
+      isFavPhotoExist={favoritedPhotos.length > 0} 
+      />
 
-      <div className="topics">
-        {/* Render topics dynamically */}
-        {topics.map((topic) => (
-          <div key={topic.id} className="topic" onClick={() => onTopicClick(topic)}>
-            {topic.title}
-          </div>
-        ))}
-      </div>
-
-      <div className="liked-photos">
-        <FaHeart /> Total liked photos: {likedCount}
-      </div>
-
-      <div className="heart-icon">
-        <i className="fa fa-heart"></i>
-        {notificationCount > 0 && (
-          <div className="notification-count">{notificationCount}</div>
-        )}
-      </div>
     </div>
-  );
-};
+  )
+}
 
-export default TopNavigationBar;
-
-
-
+export default TopNavigation;

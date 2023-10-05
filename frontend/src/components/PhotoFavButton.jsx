@@ -3,15 +3,16 @@ import React, { useCallback, useState } from 'react';
 import FavIcon from './FavIcon';
 import '../styles/PhotoFavButton.scss';
 
-const PhotoFavButton = ({ liked, toggleLike }) => {
-  const buttonClass = liked ? 'liked' : 'not-liked';
-
+function PhotoFavButton(props) {
   return (
-    <button className={`photo-list__fav-icon ${buttonClass}`} onClick={toggleLike}>
-      {/* Add your favorite icon SVG or image here */}
-    </button>
+    <div className="photo-list__fav-icon" onClick={props.toggleFavorite}>
+      <div className="photo-list__fav-icon-svg">
+      <FavIcon
+          selected={props.isFavorited}
+        />
+      </div>
+    </div>
   );
-};
-
+}
 
 export default PhotoFavButton;
