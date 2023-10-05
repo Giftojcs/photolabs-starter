@@ -3,22 +3,21 @@ import React from "react";
 import "../styles/TopicList.scss";
 import TopicListItem from "./TopicListItem";
 
-//TopicList Component
-const TopicList = (props) => {
-
+// ModifiedTopicList Component
+const ModifiedTopicList = (props) => {
   return (
     <div className="top-nav-bar__topic-list">
-      {props.topics.map((topic) => (
+      {props.topics.map((modifiedTopic) => (
         <TopicListItem
-          key={topic.id}
-          topic={topic.title}
-          getPhotosByTopic={() => props.getPhotosByTopic(topic.id)}
+          key={modifiedTopic.id}
+          topic={modifiedTopic.title}
+          getPhotosByTopic={() => props.getPhotosByTopic(modifiedTopic.id)}
         />
       ))}
     </div>
   );
 };
 
-export default TopicList;
+export default ModifiedTopicList;
 
 
