@@ -5,7 +5,7 @@ import closeSymbol from '../assets/closeSymbol.svg';
 import PhotoList from 'components/PhotoList';
 import PhotoFavButton from 'components/PhotoFavButton';
 
-//Photo Modal Components
+//Photo Modal Components implementation
 const PhotoDetailsModal = (props) => {
   const { id, location, similar_photos, urls, user } = props.photo;
   const { toggleFavorite, favoritedPhotos } = props;
