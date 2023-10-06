@@ -13,17 +13,21 @@ The primary goal of this project is to build a client-side application using Rea
 
 **Screenshots:**
 
-PhotoLabs
-![Photolab main ](https://github.com/Giftojcs/photolabs-starter/assets/105958169/f1666b46-be8f-4fdd-83b0-27ad61575a2a)
+PhotoLabs HomePage
+
+![PhotoLabs HomePage](https://github.com/Giftojcs/photolabs-starter/assets/105958169/c23c2223-6f4d-4944-8ee5-c8002ad6c242)
+
+PhotoLabs HomePage Liked Photo
+
+![PhotoLabs Licked Photo](https://github.com/Giftojcs/photolabs-starter/assets/105958169/b8728978-101b-48a7-9a0a-063df83dda24)
+
 
 Photo Detail Modal
-![Modal Photo](https://github.com/Giftojcs/photolabs-starter/assets/105958169/0c6a67b4-c2c5-47a2-ad0a-b05fd255ea98)
+
+![Photo Detail Modal](https://github.com/Giftojcs/photolabs-starter/assets/105958169/09315ea9-c337-456a-b2e4-065ece5b85dd)
 
 Top Navigation Bar
-![TopNavigationBar](https://github.com/Giftojcs/photolabs-starter/assets/105958169/2727e512-d4ab-4209-82b4-6900a62e6820)
-
-Favorite Photo Click Count
-![FavoritePhotoCount](https://github.com/Giftojcs/photolabs-starter/assets/105958169/7f2a7cab-12e7-429d-8bb3-f99cc38cb3e3)
+![Top Navigation Bar](https://github.com/Giftojcs/photolabs-starter/assets/105958169/6fcdfa30-7338-465e-8e4a-a09a1463b614)
 
 **Functional Requirements:**
 
